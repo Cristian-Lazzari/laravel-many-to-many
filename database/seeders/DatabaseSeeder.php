@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\TagsTableSeeder;
 use Database\Seeders\UsersTableSeeder;
 use Database\Seeders\ProjectsTableSeeder;
 
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             CategoriesTableSeeder::class,
+            TagsTableSeeder::class,
             ProjectsTableSeeder::class,
         ]);
     }

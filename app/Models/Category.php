@@ -13,7 +13,7 @@ class Category extends Model
 
     public function project() {
         // hasMany si usa sul model della tabella che NON ha la chiave esterna in una relazione uno a molti
-        // hasOone si usa sul model della tabella che NON ha la chiave esterna in una relazione uno a uno
+        // hasOne si usa sul model della tabella che NON ha la chiave esterna in una relazione uno a uno
         return $this->hasMany(Project::class);
     }
 }

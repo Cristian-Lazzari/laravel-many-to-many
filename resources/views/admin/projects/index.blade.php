@@ -49,7 +49,11 @@
                         <td>{{$project->name}}</td>
                         <td>{{$project->category->name}}</td>
                         <td>{{$project->link}}</td>
-                        <td></td>
+                        <td>
+                            @foreach ($project->tags as $tag)
+                                <a href="{{ route('admin.tags.show', ['tag' => $tag]) }}">{{ $tag->name }}</a>{{ !$loop->last ? ',' : '' }}
+                            @endforeach
+                        </td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('admin.projects.show', ['project' =>$project]) }}">show</a>
                             <a class="btn btn-warning" href="{{ route('admin.projects.edit', ['project' =>$project]) }}">edit</a>

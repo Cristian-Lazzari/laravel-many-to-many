@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\Tag;
 use App\Models\Project;
 use App\Models\Category;
 use Faker\Generator as Faker;
@@ -18,9 +19,10 @@ class ProjectsTableSeeder extends Seeder
 {
     $categories = Category::all();
     $categories->shift();
+    $tags = Tag::all()->pluck('id');
     for ($i = 0; $i < 50; $i++) {
 
-        Project::create([
+        $project = Project::create([
             'category_id'   => $faker->randomElement($categories)->id,
             'name'     => $faker->words(rand(2, 10), true),
             'description'   => $faker->paragraphs(rand(2, 20), true),
@@ -29,6 +31,7 @@ class ProjectsTableSeeder extends Seeder
             'url_image' => 'https://picsum.photos/id/' . rand(1, 270) . '/500/400',
             'url_gif' => 'https://picsum.photos/id/' . rand(1, 270) . '/500/400',
         ]);
+        $project->tags()->sync($faker->randomElements($tags, null));
     }
 }
 }

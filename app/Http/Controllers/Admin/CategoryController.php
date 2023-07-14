@@ -8,10 +8,10 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    // private $validations = [
-    //     'name'          => 'required|string|min:5|max:100',
-    //     'description'   => 'required|string',
-    // ];
+    private $validations = [
+        'name'          => 'required|string|min:5|max:100',
+        'description'   => 'required|string',
+    ];
 
     public function index()
     {
@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        //$request->validate($this->validations);
+        $request->validate($this->validations);
         
         $data = $request->all();
         
@@ -56,7 +56,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        //$request->validate($this->validations);
+        $request->validate($this->validations);
         
         $data = $request->all();
 
@@ -72,6 +72,11 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        // dd($category->project);
+        foreach ($category->project as $project) {
+            $project->category_id = 1;
+            $project->update();
+        }
         $category->delete();
         return to_route('admin.categories.index')->with('delete_success', $category);
     }

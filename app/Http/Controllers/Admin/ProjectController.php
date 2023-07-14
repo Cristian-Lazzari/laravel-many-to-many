@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use App\Models\Project;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
-    // private $validations = [
-    //     'name'          => 'required|string|min:5|max:100',
-    //     'link'          => 'required|string|max:500',
-    //     'link_github'   => 'required|string|max:500',
-    //     'url_image'     => 'string|max:500',
-    //     'url_gif'       => 'string|max:500',
-    //     'description'   => 'string',
-    // ];
+    private $validations = [
+        'name'          => 'required|string|min:5|max:100',
+        'link'          => 'required|string|max:500',
+        'link_github'   => 'required|string|max:500',
+        'url_image'     => 'string|max:500',
+        'url_gif'       => 'string|max:500',
+        'description'   => 'string',
+    ];
 
     public function index()
     {
@@ -27,14 +29,16 @@ class ProjectController extends Controller
     
     public function create()
     {
-        return view('admin.projects.create');
+        $categories = Category::all();
+        $tags       = Tag::all();
+        return view('admin.projects.create', compact('categories', 'tags') );
     }
 
 
     public function store(Request $request)
     {
         
-        //$request->validate($this->validations);
+        $request->validate($this->validations);
         
         $data = $request->all();
         dd($data);
@@ -65,7 +69,7 @@ class ProjectController extends Controller
 
     public function update(Request $request, Project $project)
     {
-       //$request->validate($this->validations);
+       $request->validate($this->validations);
         
         $data = $request->all();
 

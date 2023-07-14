@@ -15,7 +15,7 @@
             value="{{ old('name') }}"
         >
         <div class="invalid-feedback">
-            @error('nome') {{ $message }} @enderror
+            @error('name') {{ $message }} @enderror
         </div>
     </div>
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
@@ -30,6 +31,7 @@ Route::middleware(['auth', 'verified'])
         Route::delete('/projects/{project}/hardDelete', [ProjectController::class, 'harddelete'])->name('projects.hardDelete');
         Route::resource('projects', ProjectController::class);
         Route::resource('categories', CategoryController::class);
+        Route::resource('tags', TagController::class);
 });
 
 Route::middleware('auth')
